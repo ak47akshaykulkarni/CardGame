@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Padding="20"
+             x:Class="CardGame.Views.UserDetailsPage">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+            <Entry Placeholder="Your Good name please!" Text="{Binding CurrentUser}"/>
+            <Button Text="Let it bigin" 
+                    Command="{Binding EnterUserCommand}" 
+                    IsEnabled="{Binding IsEnterText}"
+                    BackgroundColor="Indigo"
+                    TextColor="White"/>
+            <Label Text="{Binding Version}" 
+                   VerticalOptions="End" 
+                   FontSize="Small" 
+                   TextColor="Gray"
+                   HorizontalOptions="Center"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Images="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             xmlns:controls="clr-namespace:CardGame.CustomControl;assembly=CardGame"
+             x:Class="CardGame.Views.GamePage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" IsVisible="{Binding PTwoPlaying}" Rotation="180" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"
+                       Grid.Column="0" BackgroundColor="Red" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CompareOverallRankCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="http://footyroom.com/pics/favicons/favicon.ico"
+                       Grid.Column="1" BackgroundColor="Purple" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CompareLoyaltyCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"
+                       Grid.Column="2" BackgroundColor="Red" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CompareCunningnessCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="http://www.woffamily.org/favicon.ico"
+                       Grid.Column="3" BackgroundColor="Purple" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CompareCombatCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+            <Frame x:Name="PTwoCard" Grid.Row="1" Margin="10" BindingContext="{Binding PlayerSecondData}">
+                <!--<Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped" />
+                </Frame.GestureRecognizers>-->
+                <Grid x:Name="PlayerTwoCard" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Images:CircleImage Source="{Binding DisplayImage}" 
+                                        Grid.Row="0" Grid.Column="2"/>
+                    <StackLayout Orientation="Vertical" 
+                        Grid.Column="0" 
+                        Grid.ColumnSpan="2" 
+                        Grid.RowSpan="2" >
+                        <Label  Text="{Binding Title}" FontSize="Large" FontAttributes="Bold" TextColor="DarkOrange"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"/>
+                            <Label Text="{Binding OverallRank}" FontSize="Medium"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="http://footyroom.com/pics/favicons/favicon.ico"/>
+                            <Label Text="{Binding LoyaltyScore}" FontSize="Medium"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"/>
+                            <Label Text="{Binding CunningnessScore}" FontSize="Medium"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="http://www.woffamily.org/favicon.ico"/>
+                            <Label Text="{Binding CombatScore}" FontSize="Medium"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+            <Frame Grid.Row="2" Margin="10">
+                <StackLayout Orientation="Vertical">
+                    <Slider  x:Name="slider" 
+                             Minimum="-5"  Maximum="5" 
+                             Value="{Binding Score,Mode=OneWay}" 
+                             VerticalOptions="CenterAndExpand"/>
+                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                        <Button BackgroundColor="Indigo" Text="Next"
+                                IsEnabled="{Binding IsBusy}"
+                                Command="{Binding CheckForWinnerCommand}"
+                                CommandParameter=""
+                                x:Name="BtnNext" HorizontalOptions="CenterAndExpand"
+                                TextColor="White"/>
+                        <Label x:Name="MyScore" FontSize="Medium" 
+                               Text="{Binding CurrentUser}"
+                               VerticalTextAlignment="End"
+                               HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <Frame x:Name="POneCard" Grid.Row="3" Margin="10" BindingContext="{Binding PlayerFirstData}">
+                <!--<Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+                </Frame.GestureRecognizers>-->
+                <Grid x:Name="PlayerOneCard">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Images:CircleImage Source="{Binding DisplayImage}" Grid.Row="0" Grid.Column="2"/>
+                    <StackLayout  Orientation="Vertical" 
+                                  Grid.Column="0" 
+                                  Grid.ColumnSpan="2" 
+                                  Grid.RowSpan="2" >
+                        <Label  Text="{Binding Title}" FontSize="Large" FontAttributes="Bold" TextColor="DarkOrange"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"/>
+                            <Label Text="{Binding OverallRank}" FontSize="Medium"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="http://footyroom.com/pics/favicons/favicon.ico"/>
+                            <Label Text="{Binding LoyaltyScore}" FontSize="Medium"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"/>
+                            <Label Text="{Binding CunningnessScore}" FontSize="Medium"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="http://www.woffamily.org/favicon.ico"/>
+                            <Label Text="{Binding CombatScore}" FontSize="Medium"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+            <Grid Grid.Row="4" IsVisible="{Binding POnePlaying}" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"
+                       Grid.Column="0" BackgroundColor="Red" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CompareOverallRankCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="http://footyroom.com/pics/favicons/favicon.ico"
+                       Grid.Column="1" BackgroundColor="Purple" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CompareLoyaltyCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"
+                       Grid.Column="2" BackgroundColor="Red" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CompareCunningnessCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="http://www.woffamily.org/favicon.ico"
+                       Grid.Column="3" BackgroundColor="Purple" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CompareCombatCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+
+            <controls:AdControlView Grid.Row="5"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
