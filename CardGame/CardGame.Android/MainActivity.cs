@@ -24,7 +24,7 @@ namespace CardGame.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
             ImageCircleRenderer.Init();
-            MobileAds.Initialize(ApplicationContext, "ca-app-pub-8296970096865112~7728278184");
+            MobileAds.Initialize(ApplicationContext, Model.Credentials.AdInitialize);
         }
     }
 }
