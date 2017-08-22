@@ -15,7 +15,7 @@ namespace CardGame.Controller
         {
             HttpClient webclient = new HttpClient();
             
-            string urls = Model.Constants.BaseUrl + Model.Constants.VersionNumnber.ToString();
+            string urls = Model.Credentials.BaseUrl + Model.Constants.VersionNumnber.ToString();
             
             using (var httpClient = new HttpClient())
             {
