@@ -97,8 +97,10 @@
                                 IsEnabled="{Binding IsBusy}"
                                 Command="{Binding CheckForWinnerCommand}"
                                 CommandParameter=""
-                                x:Name="BtnNext" HorizontalOptions="CenterAndExpand"
+                                x:Name="BtnNext"
+                                HorizontalOptions="StartAndExpand"
                                 TextColor="White"/>
+                        <Label Text="{Binding StatusDisplay}"/>
                         <Label x:Name="MyScore" FontSize="Medium" 
                                Text="{Binding CurrentUser}"
                                VerticalTextAlignment="End"
@@ -106,7 +108,9 @@
                     </StackLayout>
                 </StackLayout>
             </Frame>
-            <Frame x:Name="POneCard" Grid.Row="3" Margin="10" BindingContext="{Binding PlayerFirstData}">
+            <Frame x:Name="POneCard" Grid.Row="3" 
+                   Margin="10" 
+                   BindingContext="{Binding PlayerFirstData}">
                 <!--<Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
                 </Frame.GestureRecognizers>-->
@@ -145,7 +149,9 @@
                     </StackLayout>
                 </Grid>
             </Frame>
-            <Grid Grid.Row="4" IsVisible="{Binding POnePlaying}" Margin="10">
+            <Grid Grid.Row="4" 
+                  IsVisible="{Binding POnePlaying}" 
+                  Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

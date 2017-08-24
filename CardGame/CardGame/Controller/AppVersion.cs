@@ -45,5 +45,38 @@ namespace CardGame.Controller
             }
             return null;            
         }
+
+        public static async Task<bool> AddSuggestion(string name,string suggestion,string version,string status,string device)
+        {
+            HttpClient webclient = new HttpClient();
+
+            string urls = $"{Model.Credentials.ApiUrl}{Model.Credentials.SuggestionApi}name={name}&suggestion={suggestion}&version={version}&status={status}&device={device}";
+
+            using (var httpClient = new HttpClient())
+            {
+                try
+                {
+                    var response = await httpClient.GetAsync(urls).ConfigureAwait(false);
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        var responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        Model.StatusMessage deserialized = JsonConvert.DeserializeObject<Model.StatusMessage>(responseContent);
+                        if (deserialized.Code == 200)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            throw new Exception(deserialized.Description);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+            return false;
+        }
     }
 }

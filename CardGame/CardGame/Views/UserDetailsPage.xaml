@@ -11,6 +11,10 @@
                     IsEnabled="{Binding IsEnterText}"
                     BackgroundColor="Indigo"
                     TextColor="White"/>
+            <Button Text="Suggestion/Error Report"
+                    Command="{Binding NavigateSuggestionPage}"
+                    BackgroundColor="Red"
+                    TextColor="Black"/>
             <Label Text="{Binding Version}" 
                    VerticalOptions="End" 
                    FontSize="Small" 

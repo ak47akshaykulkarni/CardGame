@@ -43,9 +43,9 @@ namespace CardGame.ViewModels
 
         CardAttributes playerHiddenData, playerSecondData, playerFirstData;
         
-        string statusDisplay,currentUser;
+        string statusDisplay,currentUser,tradeCategory;
          List<CardAttributes> allAre;
-        bool pOneWin, isBusy=false,pOnePlaying=true, pTwoPlaying= false;
+        bool pOneWin, isBusy=true,pOnePlaying=true, pTwoPlaying= false;
         int score = 0;
 
         public Command CheckForWinnerCommand{ get; }
@@ -67,7 +67,11 @@ namespace CardGame.ViewModels
             if (POnePlaying == true)
                 PlayerSecondData = playerHiddenData;
             else
+            {
                 PlayerFirstData = playerHiddenData;
+                await Task.Delay(3000);
+            }
+                
 
             int POneScore=0, PTwoScore=0;
 
@@ -76,33 +80,40 @@ namespace CardGame.ViewModels
                 case 0:
                     POneScore = PlayerFirstData.OverallRank;
                     PTwoScore = PlayerSecondData.OverallRank;
+                    TradeCategory = "Overall Rank";
                     break;
                 case 1:
                     POneScore = PlayerFirstData.LoyaltyScore;
                     PTwoScore = PlayerSecondData.LoyaltyScore;
+                    TradeCategory = "Loyalty";
                     break;
                 case 2:
                     POneScore = PlayerFirstData.CunningnessScore;
                     PTwoScore = PlayerSecondData.CunningnessScore;
+                    TradeCategory = "Cunningness";
                     break;
                 case 3:
                     POneScore = PlayerFirstData.CombatScore;
                     PTwoScore = PlayerSecondData.CombatScore;
+                    TradeCategory = "Combat";
                     break;
                 default:
                     POneScore = PlayerFirstData.OverallRank;
                     PTwoScore = PlayerSecondData.OverallRank;
+                    TradeCategory = "Overall Rank";
                         break;
             }
 
             if (POneScore > PTwoScore)
             {
                 Score++;
+                pOneWin = true;
                 POnePlaying = true;
             }
             else if (POneScore < PTwoScore)
             {
                 Score--;
+                pOneWin = false;
                 POnePlaying = false;
             }
             else
@@ -110,7 +121,7 @@ namespace CardGame.ViewModels
                 DependencyService.Get<Dependencies.ITextToSpeech>().Speak("Death is the enemy");
                 DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify("Death is the enemy!");
             }
-            IsBusy = true;
+            
             if (Score == -5 || Score == 5)
             {
                 if (Score == -5)
@@ -135,15 +146,26 @@ namespace CardGame.ViewModels
                 }
                 Score = 0;
             }
+            if (POnePlaying == false)
+            {
+                
+                CheckForWinner();
+                await Task.Delay(2000);
+                Random r = new Random();
+                CompareCards(r.Next(0, 3));
+            }
+            else
+            {
+                IsBusy = true;
+            }
         }
 
         async void CheckForWinner()
         {
             IsBusy = false;
-            
+            TradeCategory = "";
             PlayerFirstData = PlayerSecondData = null;
-            await Task.Delay(1000);
-           
+            
             Random random = new Random();
             int rnd = random.Next(0, allAre.Count);
             if (POnePlaying == true)
@@ -196,9 +218,20 @@ namespace CardGame.ViewModels
             }
         }
 
+        public string TradeCategory
+        {
+            get { return tradeCategory; }
+            set
+            {
+                tradeCategory = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(StatusDisplay));
+            }
+        }
+
         public string StatusDisplay
         {
-            get { return $"{(pOneWin ? "P1Wins":"P2Wins")} {Score}"; }
+            get { return $"{(pOneWin ? "P1Wins":"Wait P2Wins")} Trade: {TradeCategory}"; }
         }
 
         public CardAttributes PlayerFirstData

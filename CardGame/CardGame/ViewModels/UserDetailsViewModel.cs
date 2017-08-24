@@ -15,6 +15,8 @@ namespace CardGame.ViewModels
         public UserDetailsViewModel()
         {
             EnterUserCommand = new Command(EnterUser);
+            NavigateSuggestionPage = new Command(EnterSuggestion);
+            
             this.CurrentUser = Settings.UserNameInfo;
             //OnPropertyChanged(nameof(CurrentUser));
             VersionNumber = Model.Constants.VersionNumnber;
@@ -31,6 +33,7 @@ namespace CardGame.ViewModels
 
         public int VersionNumber { get; set; }
         public Command EnterUserCommand { get; }
+        public Command NavigateSuggestionPage { get; }
 
         public bool IsEnterText
         {
@@ -65,6 +68,10 @@ namespace CardGame.ViewModels
             Settings.UserNameInfo = CurrentUser;
             Model.Constants.CurrentUser= CurrentUser;
             Application.Current.MainPage=new Views.GamePage();
+        }
+        void EnterSuggestion()
+        {
+            Application.Current.MainPage = new Views.SuggestionPage();
         }
     }
     

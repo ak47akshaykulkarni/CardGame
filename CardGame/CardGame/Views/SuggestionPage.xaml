@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CardGame.Views.SuggestionPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="EntryName" Placeholder="Your Good name please!" Text=""/>
+            <Entry x:Name="EntryVersion" Placeholder="Version" IsEnabled="False" />
+            <Entry x:Name="EntryDevice" Placeholder="Device" IsEnabled="False"/>
+            <Label Text="Suggestion/Error Report : " />
+            <Editor x:Name="EditorSuggestion" HeightRequest="200"/>
+            <Button x:Name="BtnSubmit"
+                Text="Submit"
+                    BackgroundColor="Indigo"
+                    TextColor="White"/>
+            <Button Text="Cancel" x:Name="BtnCancel"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
