@@ -6,11 +6,21 @@
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
             <Entry Placeholder="Your Good name please!" Text="{Binding CurrentUser}"/>
-            <Button Text="Let it bigin" 
-                    Command="{Binding EnterUserCommand}" 
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Button Text="1 Player" 
+                        HorizontalOptions="FillAndExpand"
+                    Command="{Binding EnterOnePlayerCommand}" 
                     IsEnabled="{Binding IsEnterText}"
                     BackgroundColor="Indigo"
                     TextColor="White"/>
+                <Button Text="2 player"
+                        HorizontalOptions="FillAndExpand"
+                    Command="{Binding EnterTwoPlayerCommand}" 
+                    IsEnabled="{Binding IsEnterText}"
+                    BackgroundColor="Indigo"
+                    TextColor="White"/>
+            </StackLayout>
+            
             <Button Text="Suggestion/Error Report"
                     Command="{Binding NavigateSuggestionPage}"
                     BackgroundColor="Red"

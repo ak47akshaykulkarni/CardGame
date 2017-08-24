@@ -22,12 +22,14 @@ namespace CardGame.Helpers
 		#region Setting Constants
 
 		private const string UserName = "settings_key";
-		private static readonly string SettingsDefault = string.Empty;
+        private const string IsBotOpponent = "IsBot";
+        private static readonly string SettingsDefault = string.Empty;
+        private static readonly bool SettingsDefaultBool = false;
 
-		#endregion
+        #endregion
 
 
-		public static string UserNameInfo
+        public static string UserNameInfo
 		{
 			get
 			{
@@ -38,6 +40,17 @@ namespace CardGame.Helpers
 				AppSettings.AddOrUpdateValue(UserName, value);
 			}
 		}
+        public static bool BotOpponent
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(IsBotOpponent, SettingsDefaultBool);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(IsBotOpponent, value);
+            }
+        }
 
-	}
+    }
 }

@@ -19,6 +19,8 @@ namespace CardGame.ViewModels
             Controller.CardsDataController.CreateAllCards();
             allAre = new List<CardAttributes>();
             allAre = Constants.ListOFCards;
+            IsBusy = true;
+            IsBot = Settings.BotOpponent;
 
             PlayerFirstData = PlayerSecondData = null;
             Random random = new Random();
@@ -45,7 +47,7 @@ namespace CardGame.ViewModels
         
         string statusDisplay,currentUser,tradeCategory;
          List<CardAttributes> allAre;
-        bool pOneWin, isBusy=true,pOnePlaying=true, pTwoPlaying= false;
+        bool pOneWin, isBusy=true,isBot,pOnePlaying=true, pTwoPlaying= false;
         int score = 0;
 
         public Command CheckForWinnerCommand{ get; }
@@ -145,14 +147,22 @@ namespace CardGame.ViewModels
                     }
                 }
                 Score = 0;
+                return;
             }
-            if (POnePlaying == false)
+            if(IsBot == true)
             {
-                
-                CheckForWinner();
-                await Task.Delay(2000);
-                Random r = new Random();
-                CompareCards(r.Next(0, 3));
+                if (POnePlaying == false)
+                {
+
+                    CheckForWinner();
+                    await Task.Delay(2000);
+                    Random r = new Random();
+                    CompareCards(r.Next(0, 3));
+                }
+                else
+                {
+                    IsBusy = true;
+                }
             }
             else
             {
@@ -188,6 +198,17 @@ namespace CardGame.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public bool IsBot
+        {
+            get { return isBot; }
+            set
+            {
+                isBot = value;
+                OnPropertyChanged();
+            }
+        }
+
         public bool POnePlaying
         {
             get { return pOnePlaying; }

@@ -22,25 +22,25 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"
-                       Grid.Column="0" BackgroundColor="Red" HeightRequest="30">
+                       Grid.Column="0" BackgroundColor="Pink" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareOverallRankCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
                 <Image Source="http://footyroom.com/pics/favicons/favicon.ico"
-                       Grid.Column="1" BackgroundColor="Purple" HeightRequest="30">
+                       Grid.Column="1" BackgroundColor="SkyBlue" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareLoyaltyCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
                 <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"
-                       Grid.Column="2" BackgroundColor="Red" HeightRequest="30">
+                       Grid.Column="2" BackgroundColor="Pink" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareCunningnessCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
                 <Image Source="http://www.woffamily.org/favicon.ico"
-                       Grid.Column="3" BackgroundColor="Purple" HeightRequest="30">
+                       Grid.Column="3" BackgroundColor="SkyBlue" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareCombatCommand}"/>
                     </Image.GestureRecognizers>
@@ -100,7 +100,7 @@
                                 x:Name="BtnNext"
                                 HorizontalOptions="StartAndExpand"
                                 TextColor="White"/>
-                        <Label Text="{Binding StatusDisplay}"/>
+                        <Label Text="{Binding TradeCategory}"/>
                         <Label x:Name="MyScore" FontSize="Medium" 
                                Text="{Binding CurrentUser}"
                                VerticalTextAlignment="End"
@@ -159,25 +159,25 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"
-                       Grid.Column="0" BackgroundColor="Red" HeightRequest="30">
+                       Grid.Column="0" BackgroundColor="Pink" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareOverallRankCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
                 <Image Source="http://footyroom.com/pics/favicons/favicon.ico"
-                       Grid.Column="1" BackgroundColor="Purple" HeightRequest="30">
+                       Grid.Column="1" BackgroundColor="SkyBlue" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareLoyaltyCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
                 <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"
-                       Grid.Column="2" BackgroundColor="Red" HeightRequest="30">
+                       Grid.Column="2" BackgroundColor="Pink" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareCunningnessCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
                 <Image Source="http://www.woffamily.org/favicon.ico"
-                       Grid.Column="3" BackgroundColor="Purple" HeightRequest="30">
+                       Grid.Column="3" BackgroundColor="SkyBlue" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareCombatCommand}"/>
                     </Image.GestureRecognizers>

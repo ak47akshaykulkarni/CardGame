@@ -14,7 +14,9 @@ namespace CardGame.ViewModels
     {
         public UserDetailsViewModel()
         {
-            EnterUserCommand = new Command(EnterUser);
+            
+            EnterOnePlayerCommand = new Command(EnterOnePlayer);
+            EnterTwoPlayerCommand = new Command(EnterTwoPlayer);
             NavigateSuggestionPage = new Command(EnterSuggestion);
             
             this.CurrentUser = Settings.UserNameInfo;
@@ -32,7 +34,10 @@ namespace CardGame.ViewModels
         }
 
         public int VersionNumber { get; set; }
-        public Command EnterUserCommand { get; }
+        
+        public Command EnterOnePlayerCommand { get; }
+        public Command EnterTwoPlayerCommand { get; }
+
         public Command NavigateSuggestionPage { get; }
 
         public bool IsEnterText
@@ -68,6 +73,20 @@ namespace CardGame.ViewModels
             Settings.UserNameInfo = CurrentUser;
             Model.Constants.CurrentUser= CurrentUser;
             Application.Current.MainPage=new Views.GamePage();
+        }
+        void EnterOnePlayer()
+        {
+            Settings.UserNameInfo = CurrentUser;
+            Settings.BotOpponent = true;
+            Model.Constants.CurrentUser = CurrentUser;
+            Application.Current.MainPage = new Views.GamePage();
+        }
+        void EnterTwoPlayer()
+        {
+            Settings.UserNameInfo = CurrentUser;
+            Settings.BotOpponent = false;
+            Model.Constants.CurrentUser = CurrentUser;
+            Application.Current.MainPage = new Views.GamePage();
         }
         void EnterSuggestion()
         {
