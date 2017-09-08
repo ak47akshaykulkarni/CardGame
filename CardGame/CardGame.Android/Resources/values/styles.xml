@@ -22,9 +22,16 @@
     <item name="windowActionModeOverlay">true</item>
 
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item name="android:progressBarStyleHorizontal">@style/BarraProgreso</item>
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#FF4081</item>
+  </style>
+  <style name="BarraProgreso" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:padding">7dp</item>
+    <item name="android:progressDrawable">@drawable/customprog</item>
   </style>
 </resources>

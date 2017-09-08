@@ -90,8 +90,10 @@
                 <StackLayout Orientation="Vertical">
                     <Slider  x:Name="slider" 
                              Minimum="-5"  Maximum="5" 
+                             IsVisible="False"
                              Value="{Binding Score,Mode=OneWay}" 
                              VerticalOptions="CenterAndExpand"/>
+                    <ProgressBar Progress="{Binding ProgScore,Mode=TwoWay}" />
                     <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                         <Button BackgroundColor="Indigo" Text="Next"
                                 IsEnabled="{Binding IsBusy}"
@@ -100,7 +102,8 @@
                                 x:Name="BtnNext"
                                 HorizontalOptions="StartAndExpand"
                                 TextColor="White"/>
-                        <Label Text="{Binding TradeCategory}"/>
+
+                        <Label Text="{Binding StatusDisplay,Mode=OneWay}"/>
                         <Label x:Name="MyScore" FontSize="Medium" 
                                Text="{Binding CurrentUser}"
                                VerticalTextAlignment="End"

@@ -49,6 +49,21 @@ namespace CardGame.ViewModels
          List<CardAttributes> allAre;
         bool pOneWin, isBusy=true,isBot,pOnePlaying=true, pTwoPlaying= false;
         int score = 0;
+        decimal progScore=Convert.ToDecimal(0.5);
+
+        public decimal ProgScore {
+            get
+            {
+                int sc = Score + 5;
+                progScore = Convert.ToDecimal(sc/10.0);
+                return progScore;
+            }
+            set
+            {
+                progScore =  (Score+5)/10;
+                OnPropertyChanged();
+            }
+        }
 
         public Command CheckForWinnerCommand{ get; }
 
@@ -236,6 +251,8 @@ namespace CardGame.ViewModels
                 score = value;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(StatusDisplay));
+                OnPropertyChanged(nameof(ProgScore));
+
             }
         }
 
