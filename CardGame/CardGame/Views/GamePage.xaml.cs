@@ -27,12 +27,12 @@ namespace CardGame.Views
                     if (statusofUpdate.latestversion != Model.Constants.VersionNumnber)
                     {
                         bool isupdate = await DisplayAlert("Update Available!", "Version: " + statusofUpdate.latestversion.ToString() + " Is available", "Update Now", "Cancel");
-                        Device.OpenUri(new Uri(statusofUpdate.updateurl));
+                        if(isupdate) Device.OpenUri(new Uri(statusofUpdate.updateurl));
                     }
                 }
                 catch (HttpRequestException)
                 {
-                    DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify("No Internet");
+                    DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify("No Internet to check for updates");
                 }
                 catch (Exception e)
                 {

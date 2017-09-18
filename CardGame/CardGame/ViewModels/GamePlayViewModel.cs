@@ -30,8 +30,9 @@ namespace CardGame.ViewModels
             rnd = random.Next(0, allAre.Count);
             playerHiddenData = (allAre[rnd]);
             CheckForWinnerCommand = new Command(CheckForWinner);
+            GoToHomeCommand = new Command(GoHome);
 
-            CompareOverallRankCommand= new Command(async () =>CompareCards(0));
+            CompareOverallRankCommand = new Command(async () =>CompareCards(0));
             CompareLoyaltyCommand         =new Command(async()=>CompareCards(1));
             CompareCunningnessCommand     =new Command(async()=>CompareCards(2));
             CompareCombatCommand = new Command(async () => CompareCards(3));
@@ -66,6 +67,7 @@ namespace CardGame.ViewModels
         }
 
         public Command CheckForWinnerCommand{ get; }
+        public Command GoToHomeCommand { get; }
 
         /// <summary>
         /// Comparer
@@ -145,8 +147,8 @@ namespace CardGame.ViewModels
                 {
                     DependencyService.Get<Dependencies.ITextToSpeech>().Speak("VALAR More ghulis");
                     DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify("VALAR MORGHULI!");
-                    bool isRetry = await Application.Current.MainPage.DisplayAlert("Game Over", $"{CurrentUser} ,You Lose!", "Go to Home", "Retry");
-                    if (isRetry)
+                    bool GoTOHome = await Application.Current.MainPage.DisplayAlert("Game Over", $"{CurrentUser} ,You Lose!", "Go to Home", "Retry");
+                    if (GoTOHome)
                     {
                         Application.Current.MainPage = new Views.UserDetailsPage();
                     }
@@ -155,8 +157,8 @@ namespace CardGame.ViewModels
                 {
                     DependencyService.Get<Dependencies.ITextToSpeech>().Speak("Dracarys");
                     DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify("DRACARYS!");
-                    bool isRetry = await Application.Current.MainPage.DisplayAlert("Game Over", $"{CurrentUser} ,You Win!", "Go to Home", "Retry");
-                    if (isRetry)
+                    bool GoTOHome = await Application.Current.MainPage.DisplayAlert("Game Over", $"{CurrentUser} ,You Win!", "Go to Home", "Retry");
+                    if (GoTOHome)
                     {
                         Application.Current.MainPage = new Views.UserDetailsPage();
                     }
@@ -201,6 +203,14 @@ namespace CardGame.ViewModels
             rnd = random.Next(0, allAre.Count);
             playerHiddenData = (allAre[rnd]);
         }
+
+        async void GoHome()
+        {
+            Application.Current.MainPage = new Views.UserDetailsPage();
+        }
+
+       
+
 
         public string CurrentUser { get { return Constants.CurrentUser; } }
 

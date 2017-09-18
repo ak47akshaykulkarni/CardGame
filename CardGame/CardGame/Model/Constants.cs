@@ -10,6 +10,6 @@ namespace CardGame.Model
     {
         public static List<CardAttributes> ListOFCards { get; set; }
         public static string CurrentUser { get; set; }
-        public static int VersionNumnber = 6;
+        public static int VersionNumnber = 8;
     }
 }

@@ -65,23 +65,32 @@
                     <StackLayout Orientation="Vertical" 
                         Grid.Column="0" 
                         Grid.ColumnSpan="2" 
+                                 Spacing="5"
                         Grid.RowSpan="2" >
                         <Label  Text="{Binding Title}" FontSize="Large" FontAttributes="Bold" TextColor="DarkOrange"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"/>
-                            <Label Text="{Binding OverallRank}" FontSize="Medium"/>
+                        <StackLayout Orientation="Horizontal" Spacing="20">
+                            <StackLayout Orientation="Horizontal" Spacing="2" >
+                                <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png" BackgroundColor="Pink"/>
+                                <Label Text="Overall Rank " FontSize="Medium"/>
+                                <Label Text="{Binding OverallRank}" FontSize="Medium"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Spacing="2" >
+                                <Image Source="http://footyroom.com/pics/favicons/favicon.ico" BackgroundColor="SkyBlue" />
+                                <Label Text="Loyalty" FontSize="Medium"/>
+                                <Label Text="{Binding LoyaltyScore}" FontSize="Medium"/>
+                            </StackLayout>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="http://footyroom.com/pics/favicons/favicon.ico"/>
-                            <Label Text="{Binding LoyaltyScore}" FontSize="Medium"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"/>
-                            <Label Text="{Binding CunningnessScore}" FontSize="Medium"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="http://www.woffamily.org/favicon.ico"/>
-                            <Label Text="{Binding CombatScore}" FontSize="Medium"/>
+                        <StackLayout Orientation="Horizontal" Spacing="20">
+                            <StackLayout Orientation="Horizontal" Spacing="2" >
+                                <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico" BackgroundColor="Pink"/>
+                                <Label Text="Cunningness" FontSize="Medium"/>
+                                <Label Text="{Binding CunningnessScore}" FontSize="Medium"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"  Spacing="2" >
+                                <Image Source="http://www.woffamily.org/favicon.ico" BackgroundColor="SkyBlue"/>
+                                <Label Text="Combat" FontSize="Medium"/>
+                                <Label Text="{Binding CombatScore}" FontSize="Medium"/>
+                            </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </Grid>
@@ -100,6 +109,12 @@
                                 Command="{Binding CheckForWinnerCommand}"
                                 CommandParameter=""
                                 x:Name="BtnNext"
+                                HorizontalOptions="StartAndExpand"
+                                TextColor="White"/>
+                        <Button BackgroundColor="Indigo" Text="Home"
+                                Command="{Binding GoToHomeCommand}"
+                                CommandParameter=""
+                                x:Name="BtnHome"
                                 HorizontalOptions="StartAndExpand"
                                 TextColor="White"/>
 
@@ -131,23 +146,32 @@
                     <StackLayout  Orientation="Vertical" 
                                   Grid.Column="0" 
                                   Grid.ColumnSpan="2" 
+                                  Spacing="5"
                                   Grid.RowSpan="2" >
                         <Label  Text="{Binding Title}" FontSize="Large" FontAttributes="Bold" TextColor="DarkOrange"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"/>
-                            <Label Text="{Binding OverallRank}" FontSize="Medium"/>
+                        <StackLayout Orientation="Horizontal" Spacing="20">
+                            <StackLayout Orientation="Horizontal" Spacing="2" >
+                                <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"  BackgroundColor="Pink"/>
+                                <Label Text="Overall Rank " FontSize="Medium"/>
+                                <Label Text="{Binding OverallRank}" FontSize="Medium"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Spacing="2" >
+                                <Image Source="http://footyroom.com/pics/favicons/favicon.ico" BackgroundColor="SkyBlue"/>
+                                <Label Text="Loyalty" FontSize="Medium"/>
+                                <Label Text="{Binding LoyaltyScore}" FontSize="Medium"/>
+                            </StackLayout>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="http://footyroom.com/pics/favicons/favicon.ico"/>
-                            <Label Text="{Binding LoyaltyScore}" FontSize="Medium"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"/>
-                            <Label Text="{Binding CunningnessScore}" FontSize="Medium"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="http://www.woffamily.org/favicon.ico"/>
-                            <Label Text="{Binding CombatScore}" FontSize="Medium"/>
+                        <StackLayout Orientation="Horizontal" Spacing="20">
+                            <StackLayout Orientation="Horizontal" Spacing="2">
+                                <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"  BackgroundColor="Pink"/>
+                                <Label Text="Cunningness" FontSize="Medium"/>
+                                <Label Text="{Binding CunningnessScore}" FontSize="Medium"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal"  Spacing="2" >
+                                <Image Source="http://www.woffamily.org/favicon.ico" BackgroundColor="SkyBlue"/>
+                                <Label Text="Combat" FontSize="Medium"/>
+                                <Label Text="{Binding CombatScore}" FontSize="Medium"/>
+                            </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </Grid>
@@ -186,7 +210,6 @@
                     </Image.GestureRecognizers>
                 </Image>
             </Grid>
-
             <controls:AdControlView Grid.Row="5"/>
         </Grid>
     </ContentPage.Content>
