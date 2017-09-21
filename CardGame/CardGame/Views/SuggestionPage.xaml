@@ -4,7 +4,7 @@
              Padding="10"
              x:Class="CardGame.Views.SuggestionPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout VerticalOptions="FillAndExpand">
             <Entry x:Name="EntryName" Placeholder="Your Good name please!" Text=""/>
             <Entry x:Name="EntryVersion" Placeholder="Version" IsEnabled="False" />
             <Entry x:Name="EntryDevice" Placeholder="Device" IsEnabled="False"/>

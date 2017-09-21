@@ -1,4 +1,5 @@
-﻿using CardGame.ViewModels;
+﻿using CardGame.Helpers;
+using CardGame.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,26 +20,40 @@ namespace CardGame.Views
             InitializeComponent();
             BindingContext = new  GamePlayViewModel();
 
-            Device.BeginInvokeOnMainThread(async () =>
+            if (Settings.IsUpdateToday == DateTime.Today.Day)
             {
-                try
+
+            }                
+            else
+            {
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    Model.AppStatus statusofUpdate = await Controller.AppVersion.CheckForUpdate();
-                    if (statusofUpdate.latestversion != Model.Constants.VersionNumnber)
+                    try
                     {
-                        bool isupdate = await DisplayAlert("Update Available!", "Version: " + statusofUpdate.latestversion.ToString() + " Is available", "Update Now", "Cancel");
-                        if(isupdate) Device.OpenUri(new Uri(statusofUpdate.updateurl));
+                        Model.AppStatus statusofUpdate = await Controller.AppVersion.CheckForUpdate();
+                        Settings.IsUpdateToday = DateTime.Today.Day;
+                        if (statusofUpdate.latestversion > Model.Constants.VersionNumnber)
+                        {
+                            bool isupdate = await DisplayAlert("Major Update Available!", "Version: " + statusofUpdate.latestversion.ToString() + " Is available", "Update Now", "Cancel");
+                            if (isupdate) Device.OpenUri(new Uri(statusofUpdate.updateurl));
+                        }
                     }
-                }
-                catch (HttpRequestException)
-                {
-                    DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify("No Internet to check for updates");
-                }
-                catch (Exception e)
-                {
-                    DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify(e.Message);
-                }
-            });
+                    catch (HttpRequestException)
+                    {
+                        DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify("No Internet to check for updates");
+                    }
+                    catch (Exception e)
+                    {
+                        DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify(e.Message);
+                    }
+                });
+            }
+            
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            Application.Current.MainPage = new UserDetailsPage();
+            return true;
         }
     }
 }

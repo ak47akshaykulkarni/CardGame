@@ -1,4 +1,5 @@
-﻿using CardGame.Helpers;
+﻿using Plugin.Share;
+using CardGame.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Plugin.Share.Abstractions;
 
 namespace CardGame.ViewModels
 {
@@ -18,12 +20,15 @@ namespace CardGame.ViewModels
             EnterOnePlayerCommand = new Command(EnterOnePlayer);
             EnterTwoPlayerCommand = new Command(EnterTwoPlayer);
             NavigateSuggestionPage = new Command(EnterSuggestion);
-            
+            ShareCommand = new Command(ShareApp);
+            RateCommand = new Command(RateApp);
+
+
             this.CurrentUser = Settings.UserNameInfo;
-            //OnPropertyChanged(nameof(CurrentUser));
             VersionNumber = Model.Constants.VersionNumnber;
         }
 
+        
 
         string currentUser, isCurrentUser;
         bool isEnterText;
@@ -37,7 +42,8 @@ namespace CardGame.ViewModels
         
         public Command EnterOnePlayerCommand { get; }
         public Command EnterTwoPlayerCommand { get; }
-
+        public Command ShareCommand { get; }
+        public Command RateCommand { get; }
         public Command NavigateSuggestionPage { get; }
 
         public bool IsEnterText
@@ -91,6 +97,20 @@ namespace CardGame.ViewModels
         void EnterSuggestion()
         {
             Application.Current.MainPage = new Views.SuggestionPage();
+        }
+        private async void ShareApp(object obj)
+        {
+            ShareMessage newmsg = new ShareMessage()
+            {
+                Text = "Hey GoT fan, Checkout this awesome GoT trumpCards App I've been playing ",
+                Title = "Download Game of Cards",
+                Url = "https://play.google.com/store/apps/details?id=com.yekarlo.gameofcards"
+            };
+            await CrossShare.Current.Share(newmsg);
+        }
+        private async void RateApp(object obj)
+        {
+            await CrossShare.Current.OpenBrowser("https://play.google.com/store/apps/details?id=com.yekarlo.gameofcards");
         }
     }
     

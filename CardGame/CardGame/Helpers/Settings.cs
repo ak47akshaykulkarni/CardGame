@@ -23,8 +23,10 @@ namespace CardGame.Helpers
 
 		private const string UserName = "settings_key";
         private const string IsBotOpponent = "IsBot";
+        private const string IsUpdate = "IsUpdate";
         private static readonly string SettingsDefault = string.Empty;
         private static readonly bool SettingsDefaultBool = false;
+        private static readonly int SettingsDefaultInt = 0;
 
         #endregion
 
@@ -49,6 +51,17 @@ namespace CardGame.Helpers
             set
             {
                 AppSettings.AddOrUpdateValue(IsBotOpponent, value);
+            }
+        }
+        public static int IsUpdateToday
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(IsUpdate, SettingsDefaultInt);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(IsUpdate, value);
             }
         }
 

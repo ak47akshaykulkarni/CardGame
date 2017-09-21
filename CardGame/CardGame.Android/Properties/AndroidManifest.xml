@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.yekarlo.gameofcards" android:installLocation="auto" android:versionName="0.0.8" android:versionCode="8">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.yekarlo.gameofcards" android:installLocation="auto" android:versionName="0.0.9" android:versionCode="9">
 	<uses-sdk android:minSdkVersion="15" />
-	<application android:label="Game of Cards">
+	<application android:label="Game of Cards" android:debuggable="false">
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 		<activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:theme="@android:style/Theme.Translucent" />
 	</application>

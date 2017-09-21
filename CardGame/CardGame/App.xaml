@@ -2,9 +2,17 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CardGame.App">
-	<Application.Resources>
-
-		<!-- Application resource dictionary -->
-
-	</Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="iconStyle" TargetType="Image">
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="WidthRequest" Value="30" />
+            </Style>
+            <Style x:Key="tradeLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontFamily" Value="NewRocker-Regular.ttf#NewRocker-Regular" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

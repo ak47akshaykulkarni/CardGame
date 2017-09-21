@@ -48,7 +48,7 @@ namespace CardGame.ViewModels
         
         string statusDisplay,currentUser,tradeCategory;
          List<CardAttributes> allAre;
-        bool pOneWin, isBusy=true,isBot,pOnePlaying=true, pTwoPlaying= false;
+        bool pOneWin, isBusy=true,isBot,pOnePlaying=true, pTwoPlaying= false,pTwoControls=false;
         int score = 0;
         decimal progScore=Convert.ToDecimal(0.5);
 
@@ -88,17 +88,17 @@ namespace CardGame.ViewModels
             else
             {
                 PlayerFirstData = playerHiddenData;
-                await Task.Delay(3000);
+                if(IsBot) await Task.Delay(3000);
             }
-                
-
+            
             int POneScore=0, PTwoScore=0;
 
             switch(comparer)
             {
                 case 0:
-                    POneScore = PlayerFirstData.OverallRank;
-                    PTwoScore = PlayerSecondData.OverallRank;
+                    PTwoScore = PlayerFirstData.OverallRank;
+                    POneScore = PlayerSecondData.OverallRank;
+                    RankBackground = "Red";
                     TradeCategory = "Overall Rank";
                     break;
                 case 1:
@@ -126,51 +126,50 @@ namespace CardGame.ViewModels
             if (POneScore > PTwoScore)
             {
                 Score++;
-                pOneWin = true;
                 POnePlaying = true;
             }
             else if (POneScore < PTwoScore)
             {
                 Score--;
-                pOneWin = false;
                 POnePlaying = false;
             }
             else
             {
-                DependencyService.Get<Dependencies.ITextToSpeech>().Speak("Death is the enemy");
-                DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify("Death is the enemy!");
+                Say("Death is the enemy");
+                ToastDisplay("Death is the enemy!");
             }
             
             if (Score == -5 || Score == 5)
             {
                 if (Score == -5)
                 {
-                    DependencyService.Get<Dependencies.ITextToSpeech>().Speak("VALAR More ghulis");
-                    DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify("VALAR MORGHULI!");
-                    bool GoTOHome = await Application.Current.MainPage.DisplayAlert("Game Over", $"{CurrentUser} ,You Lose!", "Go to Home", "Retry");
-                    if (GoTOHome)
+                    Say("VALAR More ghulis");
+                    ToastDisplay("VALAR MORGHULI!");
+                    bool GoToHome = await Application.Current.MainPage.DisplayAlert("Game Over", $"{CurrentUser} ,You Lose!", "Go to Home", "Replay");
+                    if (GoToHome)
                     {
                         Application.Current.MainPage = new Views.UserDetailsPage();
                     }
                 }
                 if (Score == 5)
                 {
-                    DependencyService.Get<Dependencies.ITextToSpeech>().Speak("Dracarys");
-                    DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify("DRACARYS!");
-                    bool GoTOHome = await Application.Current.MainPage.DisplayAlert("Game Over", $"{CurrentUser} ,You Win!", "Go to Home", "Retry");
-                    if (GoTOHome)
+                    Say("Dracarys");
+                    ToastDisplay("DRACARYS!");
+                    bool GoToHome = await Application.Current.MainPage.DisplayAlert("Game Over", $"{CurrentUser} ,You Win!", "Go to Home", "Replay");
+                    if (GoToHome)
                     {
                         Application.Current.MainPage = new Views.UserDetailsPage();
                     }
                 }
                 Score = 0;
+                if (IsBot) POnePlaying = true;
                 return;
             }
             if(IsBot == true)
             {
                 if (POnePlaying == false)
                 {
-
+                    
                     CheckForWinner();
                     await Task.Delay(2000);
                     Random r = new Random();
@@ -187,6 +186,15 @@ namespace CardGame.ViewModels
             }
         }
 
+        void Say(string text)
+        {
+            DependencyService.Get<Dependencies.ITextToSpeech>().Speak(text);
+        }
+        void ToastDisplay(string text)
+        {
+            DependencyService.Get<Dependencies.IToastDisplay>().SoftNotify(text);
+        }
+
         async void CheckForWinner()
         {
             IsBusy = false;
@@ -194,14 +202,18 @@ namespace CardGame.ViewModels
             PlayerFirstData = PlayerSecondData = null;
             
             Random random = new Random();
-            int rnd = random.Next(0, allAre.Count);
+            int rnd1 = random.Next(0, allAre.Count);
             if (POnePlaying == true)
-                PlayerFirstData = (allAre[rnd]);
+                PlayerFirstData = (allAre[rnd1]);
             else
-                PlayerSecondData = (allAre[rnd]);
+                PlayerSecondData = (allAre[rnd1]);
 
-            rnd = random.Next(0, allAre.Count);
-            playerHiddenData = (allAre[rnd]);
+            int rnd2 = random.Next(0, allAre.Count);
+            if (rnd1 == rnd2)
+            {
+                rnd2 = random.Next(0, allAre.Count);
+            }
+            playerHiddenData = (allAre[rnd2]);
         }
 
         async void GoHome()
@@ -209,8 +221,14 @@ namespace CardGame.ViewModels
             Application.Current.MainPage = new Views.UserDetailsPage();
         }
 
-       
-
+        public string RankBackground
+        {
+            get { return RankBackground; }
+            set
+            {
+                OnPropertyChanged();
+            }
+        }
 
         public string CurrentUser { get { return Constants.CurrentUser; } }
 
@@ -250,6 +268,16 @@ namespace CardGame.ViewModels
             set
             {
                 pTwoPlaying = value;
+                if (!isBot) PTwoControls = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool PTwoControls
+        {
+            get { return pTwoControls; }
+            set
+            {
+                pTwoControls = value;
                 OnPropertyChanged();
             }
         }
@@ -279,7 +307,7 @@ namespace CardGame.ViewModels
 
         public string StatusDisplay
         {
-            get { return $"{(pOneWin ? "P1Wins":"Wait P2Wins")} Trade: {TradeCategory}"; }
+            get { return $"Trade \n {TradeCategory}"; }
         }
 
         public CardAttributes PlayerFirstData

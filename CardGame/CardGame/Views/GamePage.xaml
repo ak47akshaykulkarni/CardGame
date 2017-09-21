@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Images="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              xmlns:controls="clr-namespace:CardGame.CustomControl;assembly=CardGame"
+             BackgroundColor="Black"
+             
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              x:Class="CardGame.Views.GamePage">
     <ContentPage.Content>
         <Grid>
@@ -14,39 +17,47 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" IsVisible="{Binding PTwoPlaying}" Rotation="180" Margin="10">
+            <Grid Grid.Row="0" IsVisible="{Binding PTwoControls}" Rotation="180" Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"
+                <Image Source="favicon_rank.png"
                        Grid.Column="0" BackgroundColor="Pink" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareOverallRankCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <Image Source="http://footyroom.com/pics/favicons/favicon.ico"
+                <Image Source="favicon_loyalty.ico"
                        Grid.Column="1" BackgroundColor="SkyBlue" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareLoyaltyCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"
+                <Image Source="favicon_horse.ico"
                        Grid.Column="2" BackgroundColor="Pink" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareCunningnessCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <Image Source="http://www.woffamily.org/favicon.ico"
+                <Image Source="favicon_combat.ico"
                        Grid.Column="3" BackgroundColor="SkyBlue" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareCombatCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
             </Grid>
-            <Frame x:Name="PTwoCard" Grid.Row="1" Margin="10" BindingContext="{Binding PlayerSecondData}">
+            <Image Source="ancient.png" Aspect="Fill" Grid.Row="1"/>
+            <Image Source="ancient.png" Aspect="Fill" Grid.Row="3"/>
+            <Frame x:Name="PTwoCard" 
+                   Grid.Row="1" 
+                   Padding="15,2" 
+                   Margin="2" 
+                   HasShadow="False" 
+                   BindingContext="{Binding PlayerSecondData}" 
+                   BackgroundColor="Transparent">
                 <!--<Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped" />
                 </Frame.GestureRecognizers>-->
@@ -60,42 +71,53 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    
                     <Images:CircleImage Source="{Binding DisplayImage}" 
                                         Grid.Row="0" Grid.Column="2"/>
                     <StackLayout Orientation="Vertical" 
                         Grid.Column="0" 
                         Grid.ColumnSpan="2" 
-                                 Spacing="5"
+                        Spacing="5"
                         Grid.RowSpan="2" >
-                        <Label  Text="{Binding Title}" FontSize="Large" FontAttributes="Bold" TextColor="DarkOrange"/>
+                        <Label  Text="{Binding Title}" 
+                                FontSize="30" 
+                                FontFamily="NewRocker-Regular.ttf#NewRocker-Regular"
+                                TextColor="#8158d3"/>
                         <StackLayout Orientation="Horizontal" Spacing="20">
                             <StackLayout Orientation="Horizontal" Spacing="2" >
-                                <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png" BackgroundColor="Pink"/>
-                                <Label Text="Overall Rank " FontSize="Medium"/>
-                                <Label Text="{Binding OverallRank}" FontSize="Medium"/>
+                                <Image Source="favicon_rank.png"
+                                       Style="{StaticResource iconStyle}"/>
+                                <Label Text="Overall Rank " Style="{StaticResource tradeLabelStyle}"/>
+                                <Label Text="{Binding OverallRank}" Style="{StaticResource tradeLabelStyle}"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" Spacing="2" >
-                                <Image Source="http://footyroom.com/pics/favicons/favicon.ico" BackgroundColor="SkyBlue" />
-                                <Label Text="Loyalty" FontSize="Medium"/>
-                                <Label Text="{Binding LoyaltyScore}" FontSize="Medium"/>
+                                <Image Source="favicon_loyalty.ico"
+                                       
+                                       Style="{StaticResource iconStyle}"/>
+                                <Label Text="Loyalty" Style="{StaticResource tradeLabelStyle}"/>
+                                <Label Text="{Binding LoyaltyScore}" Style="{StaticResource tradeLabelStyle}"/>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" Spacing="20">
                             <StackLayout Orientation="Horizontal" Spacing="2" >
-                                <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico" BackgroundColor="Pink"/>
-                                <Label Text="Cunningness" FontSize="Medium"/>
-                                <Label Text="{Binding CunningnessScore}" FontSize="Medium"/>
+                                <Image Source="favicon_horse.ico" 
+                                       
+                                       Style="{StaticResource iconStyle}"/>
+                                <Label Text="Cunningness" Style="{StaticResource tradeLabelStyle}"/>
+                                <Label Text="{Binding CunningnessScore}" Style="{StaticResource tradeLabelStyle}"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal"  Spacing="2" >
-                                <Image Source="http://www.woffamily.org/favicon.ico" BackgroundColor="SkyBlue"/>
-                                <Label Text="Combat" FontSize="Medium"/>
-                                <Label Text="{Binding CombatScore}" FontSize="Medium"/>
+                                <Image Source="favicon_combat.ico" 
+                                       
+                                       Style="{StaticResource iconStyle}"/>
+                                <Label Text="Combat" Style="{StaticResource tradeLabelStyle}"/>
+                                <Label Text="{Binding CombatScore}" Style="{StaticResource tradeLabelStyle}"/>
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </Grid>
             </Frame>
-            <Frame Grid.Row="2" Margin="10">
+            <Frame Grid.Row="2" Margin="3" BackgroundColor="Transparent" HasShadow="False" Padding="5,0">
                 <StackLayout Orientation="Vertical">
                     <Slider  x:Name="slider" 
                              Minimum="-5"  Maximum="5" 
@@ -109,26 +131,37 @@
                                 Command="{Binding CheckForWinnerCommand}"
                                 CommandParameter=""
                                 x:Name="BtnNext"
-                                HorizontalOptions="StartAndExpand"
+                                FontFamily="NewRocker-Regular.ttf#NewRocker-Regular"
+                                HorizontalOptions="Start"
                                 TextColor="White"/>
+                        <Label Text="{Binding StatusDisplay,Mode=OneWay}" 
+                               TextColor="Yellow"
+                               FontAttributes="Italic"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="End"/>
+                        <Label x:Name="MyScore" 
+                               Text="{Binding CurrentUser}"
+                               TextColor="Yellow"
+                               FontSize="Medium"
+                               FontFamily="NewRocker-Regular.ttf#NewRocker-Regular"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="EndAndExpand"/>
                         <Button BackgroundColor="Indigo" Text="Home"
                                 Command="{Binding GoToHomeCommand}"
                                 CommandParameter=""
                                 x:Name="BtnHome"
-                                HorizontalOptions="StartAndExpand"
+                                FontFamily="NewRocker-Regular.ttf#NewRocker-Regular"
+                                HorizontalOptions="Start"
                                 TextColor="White"/>
-
-                        <Label Text="{Binding StatusDisplay,Mode=OneWay}"/>
-                        <Label x:Name="MyScore" FontSize="Medium" 
-                               Text="{Binding CurrentUser}"
-                               VerticalTextAlignment="End"
-                               HorizontalOptions="EndAndExpand"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
             <Frame x:Name="POneCard" Grid.Row="3" 
-                   Margin="10" 
-                   BindingContext="{Binding PlayerFirstData}">
+                   Margin="2" 
+                   Padding="15,2"
+                   HasShadow="False"
+                   BindingContext="{Binding PlayerFirstData}"
+                   BackgroundColor="Transparent">
                 <!--<Frame.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
                 </Frame.GestureRecognizers>-->
@@ -148,29 +181,39 @@
                                   Grid.ColumnSpan="2" 
                                   Spacing="5"
                                   Grid.RowSpan="2" >
-                        <Label  Text="{Binding Title}" FontSize="Large" FontAttributes="Bold" TextColor="DarkOrange"/>
+                        <Label  Text="{Binding Title}" 
+                                FontSize="30" 
+                                FontFamily="NewRocker-Regular.ttf#NewRocker-Regular"
+                                TextColor="#8158d3"/>
                         <StackLayout Orientation="Horizontal" Spacing="20">
                             <StackLayout Orientation="Horizontal" Spacing="2" >
-                                <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"  BackgroundColor="Pink"/>
-                                <Label Text="Overall Rank " FontSize="Medium"/>
-                                <Label Text="{Binding OverallRank}" FontSize="Medium"/>
+                                <Image Source="favicon_rank.png"
+                                       Style="{StaticResource iconStyle}"/>
+                                <Label Text="Overall Rank " Style="{StaticResource tradeLabelStyle}"/>
+                                <Label Text="{Binding OverallRank}" Style="{StaticResource tradeLabelStyle}"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" Spacing="2" >
-                                <Image Source="http://footyroom.com/pics/favicons/favicon.ico" BackgroundColor="SkyBlue"/>
-                                <Label Text="Loyalty" FontSize="Medium"/>
-                                <Label Text="{Binding LoyaltyScore}" FontSize="Medium"/>
+                                <Image Source="favicon_loyalty.ico"
+                                       
+                                       Style="{StaticResource iconStyle}"/>
+                                <Label Text="Loyalty" Style="{StaticResource tradeLabelStyle}"/>
+                                <Label Text="{Binding LoyaltyScore}" Style="{StaticResource tradeLabelStyle}"/>
                             </StackLayout>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" Spacing="20">
-                            <StackLayout Orientation="Horizontal" Spacing="2">
-                                <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"  BackgroundColor="Pink"/>
-                                <Label Text="Cunningness" FontSize="Medium"/>
-                                <Label Text="{Binding CunningnessScore}" FontSize="Medium"/>
+                            <StackLayout Orientation="Horizontal" Spacing="2" >
+                                <Image Source="favicon_horse.ico" 
+                                       
+                                       Style="{StaticResource iconStyle}"/>
+                                <Label Text="Cunningness" Style="{StaticResource tradeLabelStyle}"/>
+                                <Label Text="{Binding CunningnessScore}" Style="{StaticResource tradeLabelStyle}"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal"  Spacing="2" >
-                                <Image Source="http://www.woffamily.org/favicon.ico" BackgroundColor="SkyBlue"/>
-                                <Label Text="Combat" FontSize="Medium"/>
-                                <Label Text="{Binding CombatScore}" FontSize="Medium"/>
+                                <Image Source="favicon_combat.ico" 
+                                       
+                                       Style="{StaticResource iconStyle}"/>
+                                <Label Text="Combat" Style="{StaticResource tradeLabelStyle}"/>
+                                <Label Text="{Binding CombatScore}" Style="{StaticResource tradeLabelStyle}"/>
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>
@@ -178,32 +221,32 @@
             </Frame>
             <Grid Grid.Row="4" 
                   IsVisible="{Binding POnePlaying}" 
-                  Margin="10">
+                  Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="https://community.tubebuddy.com/styles/flatawesome/MasterBadge/trophy_icon_s.png"
+                <Image Source="favicon_rank.png"
                        Grid.Column="0" BackgroundColor="Pink" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareOverallRankCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <Image Source="http://footyroom.com/pics/favicons/favicon.ico"
+                <Image Source="favicon_loyalty.ico"
                        Grid.Column="1" BackgroundColor="SkyBlue" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareLoyaltyCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <Image Source="https://link.springer.com/springerlink-static/1270017945/images/favicon/favicon.ico"
+                <Image Source="favicon_horse.ico"
                        Grid.Column="2" BackgroundColor="Pink" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareCunningnessCommand}"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <Image Source="http://www.woffamily.org/favicon.ico"
+                <Image Source="favicon_combat.ico"
                        Grid.Column="3" BackgroundColor="SkyBlue" HeightRequest="30">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CompareCombatCommand}"/>
