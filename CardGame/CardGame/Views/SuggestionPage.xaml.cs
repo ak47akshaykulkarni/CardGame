@@ -25,7 +25,7 @@ namespace CardGame.Views
                 {
                     try
                     {
-                        bool addSuggestion = await Controller.AppVersion.AddSuggestion(EntryName.Text, EditorSuggestion.Text, EntryVersion.Text, "new", EntryDevice.Text);
+                        //bool addSuggestion = true; //await Controller.AppVersion.AddSuggestion(EntryName.Text, EditorSuggestion.Text, EntryVersion.Text, "new", EntryDevice.Text);
                         Application.Current.MainPage = new UserDetailsPage();
                     }
                     catch(Exception ee)

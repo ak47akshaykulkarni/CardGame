@@ -186,6 +186,27 @@
       <Name>CardGame</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ancient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\favicon_combat.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\favicon_horse.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\favicon_loyalty.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\favicon_rank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\goc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\throne.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -14,8 +14,8 @@ namespace CardGame.Controller
         public static async Task<Model.AppStatus> CheckForUpdate()
         {
             HttpClient webclient = new HttpClient();
-            
-            string urls = Model.Credentials.BaseUrl + Model.Constants.VersionNumnber.ToString();
+
+            string urls = ""; //Model.Credentials.BaseUrl + Model.Constants.VersionNumnber.ToString();
             
             using (var httpClient = new HttpClient())
             {
@@ -50,7 +50,7 @@ namespace CardGame.Controller
         {
             HttpClient webclient = new HttpClient();
 
-            string urls = $"{Model.Credentials.ApiUrl}{Model.Credentials.SuggestionApi}name={name}&suggestion={suggestion}&version={version}&status={status}&device={device}";
+            string urls = $"";//{Model.Credentials.ApiUrl}{Model.Credentials.SuggestionApi}name={name}&suggestion={suggestion}&version={version}&status={status}&device={device}";
 
             using (var httpClient = new HttpClient())
             {
