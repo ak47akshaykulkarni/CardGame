@@ -9,7 +9,7 @@
     <PackageReference Include="Microsoft.Bcl" Version="1.1.10" />
     <PackageReference Include="Microsoft.Bcl.Build" Version="1.0.21" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Plugin.Share" Version="7.0.1" />
     <PackageReference Include="Xam.Plugin.DeviceInfo" Version="3.0.1" />
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="1.8.1." />
